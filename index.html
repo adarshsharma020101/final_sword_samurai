@@ -13,16 +13,31 @@
     background: #000;
     color: #ff2b2b;
 
-    /* ✅ New Samurai Background */
+    /* ✅ Resized Samurai Background for Desktop */
     background-image: url("data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAYEBQYFB... (full base64 string here) ...KCgo=");
-    background-size: contain;
-    background-position: center top;
+    background-size: contain;  /* Changed from 'cover' to 'contain' for full visibility */
+    background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-
-    backdrop-filter: blur(2px);
+    
+    /* Alternative: If you want a larger but still visible image, use: */
+    /* background-size: 100% auto; */
+    
+    /* Add a dark overlay for better text readability */
+    position: relative;
 }
 
+    /* Dark overlay for better text contrast */
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: -1;
+    }
 
     h1 {
         text-align: center;
@@ -104,10 +119,11 @@
         font-weight: bold;
     }
 
-    /* SAMURAI SLASH EFFECT */
-   function tickGoal(){
-    // Removed slash effect - now just updates streak
-    updateStreak();
+    /* Checkbox styling */
+    input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
     }
 </style>
 </head>
@@ -127,18 +143,15 @@
 <div class="streak" id="streakCounter">Streak: 0 days</div>
 <div class="badgeBox" id="badgeDisplay">No Achievements Yet.</div>
 
-<div id="slashEffect"></div>
-
 <script>
 let goals = [];
 let streak = localStorage.getItem("streak") ? parseInt(localStorage.getItem("streak")) : 0;
-const slashEffect = document.getElementById("slashEffect");
 
 const quotes = [
-    "“One must sharpen the spirit as one sharpens the blade.”",
-    "“When you are challenged, you are forged.”",
-    "“To conquer yourself is the highest victory.”",
-    "“The path is discipline. The reward is mastery.”"
+    ""One must sharpen the spirit as one sharpens the blade."",
+    ""When you are challenged, you are forged."",
+    ""To conquer yourself is the highest victory."",
+    ""The path is discipline. The reward is mastery.""
 ];
 
 function setDailyQuote(){
@@ -175,8 +188,7 @@ function generateCalendar() {
 }
 
 function tickGoal(){
-    slashEffect.style.opacity = 1;
-    setTimeout(() => slashEffect.style.opacity = 0, 250);
+    // Removed slash effect - now just updates streak
     updateStreak();
 }
 
@@ -204,7 +216,3 @@ function updateBadges(){
 </script>
 </body>
 </html>
-
-
-
-
